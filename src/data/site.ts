@@ -6,6 +6,11 @@ import wakhan from "@/assets/dest-wakhan.jpg";
 import guideAhmad from "@/assets/guide-ahmad.jpg";
 import guideZahra from "@/assets/guide-zahra.jpg";
 import guideNasir from "@/assets/guide-nasir.jpg";
+import heroNuristan from "@/assets/hero-nuristan.jpg";
+import heroKunar from "@/assets/hero-kunar.jpg";
+import heroPanjshir from "@/assets/hero-panjshir.jpg";
+const heroBamiyan = bamiyan;
+const heroHerat = herat;
 
 export const company = {
   name: "Silk Road Afghanistan",
@@ -143,6 +148,9 @@ export type Guide = {
   specialty: string;
   intro: string;
   image: string;
+  rating: number;
+  reviewCount: number;
+  based: string;
 };
 
 export const guides: Guide[] = [
@@ -155,6 +163,9 @@ export const guides: Guide[] = [
     intro:
       "Ahmad grew up between Kabul and the central highlands and has guided visitors across Afghanistan for over a decade.",
     image: guideAhmad,
+    rating: 4.9,
+    reviewCount: 128,
+    based: "Kabul",
   },
   {
     name: "Zahra",
@@ -165,6 +176,9 @@ export const guides: Guide[] = [
     intro:
       "Zahra connects travelers with families, artisans and cooks, offering a warm and personal view of daily Afghan life.",
     image: guideZahra,
+    rating: 5.0,
+    reviewCount: 86,
+    based: "Herat",
   },
   {
     name: "Nasir",
@@ -175,6 +189,9 @@ export const guides: Guide[] = [
     intro:
       "Nasir has crossed most of Afghanistan's high passes and handles remote-area routes, permits and safety planning.",
     image: guideNasir,
+    rating: 4.8,
+    reviewCount: 97,
+    based: "Faizabad, Badakhshan",
   },
 ];
 
@@ -256,5 +273,136 @@ export const paymentOptions = [
   {
     title: "USDT (Crypto)",
     body: "We accept USDT for deposits and balances. Wallet details are provided directly by our team.",
+  },
+];
+
+export type HeroSlide = {
+  slug: string;
+  province: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+};
+
+export const heroSlides: HeroSlide[] = [
+  {
+    slug: "bamiyan",
+    province: "Bamiyan",
+    title: "Discover the Hidden Beauty of Afghanistan",
+    description:
+      "Ancient cliffs, high valleys and the turquoise lakes of Band-e Amir — travelled with guides who grew up here.",
+    image: heroBamiyan,
+    imageAlt: "The Bamiyan valley and its sandstone cliffs at golden hour",
+  },
+  {
+    slug: "nuristan",
+    province: "Nuristan",
+    title: "Cedar Forests and Cliffside Villages",
+    description:
+      "Nuristan's green mountain country: timber villages stacked on ridges, mist in the pines and roads few travellers ever see.",
+    image: heroNuristan,
+    imageAlt: "Forested mountains of Nuristan with a village perched on a cliff",
+  },
+  {
+    slug: "kunar",
+    province: "Kunar",
+    title: "The Valley of the Blue River",
+    description:
+      "Follow the Kunar river through terraced farmland and forested ridges in Afghanistan's warm eastern valleys.",
+    image: heroKunar,
+    imageAlt: "Turquoise Kunar river winding through a green Afghan valley at sunset",
+  },
+  {
+    slug: "panjshir",
+    province: "Panjshir",
+    title: "Five Lions, One Unforgettable Valley",
+    description:
+      "Emerald water, sheer rock walls and poplar groves — a day's drive from Kabul into Afghanistan's most storied valley.",
+    image: heroPanjshir,
+    imageAlt: "The Panjshir river cutting between dramatic rocky mountains",
+  },
+  {
+    slug: "herat",
+    province: "Herat",
+    title: "A Thousand Years of Silk Road Craft",
+    description:
+      "Tilework, glassblowers, the great Friday Mosque and evening bazaars in Afghanistan's western cultural capital.",
+    image: heroHerat,
+    imageAlt: "Tiled Islamic architecture in Herat, western Afghanistan",
+  },
+];
+
+export type Review = {
+  id: string;
+  name: string;
+  country: string;
+  rating: number;
+  date: string;
+  tour: string;
+  title: string;
+  body: string;
+};
+
+export const reviews: Review[] = [
+  {
+    id: "r1",
+    name: "Marta K.",
+    country: "Poland",
+    rating: 5,
+    date: "May 2026",
+    tour: "Afghanistan Discovery Tour",
+    title: "Beyond anything I expected",
+    body: "Ahmad planned every day around what we actually wanted to see. Band-e Amir at sunrise with almost nobody around is a memory I will keep forever. I felt looked after from the airport to the flight home.",
+  },
+  {
+    id: "r2",
+    name: "David R.",
+    country: "United Kingdom",
+    rating: 5,
+    date: "April 2026",
+    tour: "Cultural Heritage Tour",
+    title: "Herat through local eyes",
+    body: "We spent an afternoon with a glassblower and an evening with a family who insisted on feeding us twice. That is not something you find on your own. Communication over WhatsApp before the trip was quick and honest.",
+  },
+  {
+    id: "r3",
+    name: "Yuki T.",
+    country: "Japan",
+    rating: 5,
+    date: "March 2026",
+    tour: "Photography Tour",
+    title: "Light, patience and trust",
+    body: "As a photographer I needed early starts and long waits. The team never rushed me once, and they always knew who to ask before I raised the camera.",
+  },
+  {
+    id: "r4",
+    name: "Sophie M.",
+    country: "France",
+    rating: 4,
+    date: "October 2025",
+    tour: "Mountain Adventure Tour",
+    title: "Wakhan is hard and worth it",
+    body: "Roads are long and basic — be honest with yourself about that. Nasir handled permits, fuel and a broken spring without drama. Four stars only because of the driving days, not the guiding.",
+  },
+  {
+    id: "r5",
+    name: "Andreas B.",
+    country: "Germany",
+    rating: 5,
+    date: "September 2025",
+    tour: "Afghanistan Discovery Tour",
+    title: "Warm, safe, well organised",
+    body: "My family were nervous before I left. Silk Road shared a daily plan and contact numbers, and my wife could reach the office any time. That mattered as much as the itinerary itself.",
+  },
+  {
+    id: "r6",
+    name: "Amira H.",
+    country: "Canada",
+    rating: 5,
+    date: "June 2025",
+    tour: "Cultural Heritage Tour",
+    title: "Perfect for a woman travelling solo",
+    body: "Zahra made this trip. Modest dress advice, women-only gatherings, and a level of comfort I honestly did not expect. I would come back tomorrow.",
   },
 ];

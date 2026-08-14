@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, MapPin, Languages, Award } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Languages, Award, Star } from "lucide-react";
 import type { Destination, Guide, Tour } from "@/data/site";
 import { whatsappLink } from "@/data/site";
 
@@ -80,46 +80,84 @@ export function TourCard({ tour }: { tour: Tour }) {
   );
 }
 
+export function StarRating({ value, size = "sm" }: { value: number; size?: "sm" | "md" }) {
+  const full = Math.round(value);
+  return (
+    <span
+      className="inline-flex items-center gap-0.5"
+      role="img"
+      aria-label={`Rated ${value} out of 5`}
+    >
+      {[1, 2, 3, 4, 5].map((n) => (
+        <Star
+          key={n}
+          aria-hidden="true"
+          className={
+            (size === "md" ? "size-5 " : "size-4 ") +
+            (n <= full ? "fill-accent text-accent" : "text-muted-foreground/40")
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
 export function GuideCard({ guide }: { guide: Guide }) {
   return (
-    <article className="overflow-hidden rounded-xl border border-border bg-card shadow-soft">
-      <div className="aspect-square overflow-hidden">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-soft transition-shadow duration-500 hover:shadow-elegant">
+      <div className="relative aspect-[4/5] overflow-hidden">
         <img
           src={guide.image}
           alt={`${guide.name}, ${guide.role}`}
           loading="lazy"
           width={800}
-          height={800}
-          className="size-full object-cover"
+          height={1000}
+          className="size-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
         />
+        <div className="card-overlay pointer-events-none absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 p-5">
+          <h3 className="text-2xl text-sand">{guide.name}</h3>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-soft">
+            {guide.role}
+          </p>
+        </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-2xl">{guide.name}</h3>
-        <p className="eyebrow mt-1">{guide.role}</p>
-        <dl className="mt-4 space-y-2 text-sm text-muted-foreground">
+
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center gap-2">
+          <StarRating value={guide.rating} />
+          <span className="text-sm font-semibold">{guide.rating.toFixed(1)}</span>
+          <span className="text-sm text-muted-foreground">({guide.reviewCount} reviews)</span>
+        </div>
+
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{guide.intro}</p>
+
+        <dl className="mt-5 space-y-2 text-sm text-muted-foreground">
           <div className="flex items-start gap-2">
-            <Languages className="mt-0.5 size-4 shrink-0 text-accent" />
-            <span>
-              <dt className="sr-only">Languages</dt>
-              <dd>{guide.languages}</dd>
-            </span>
+            <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+            <dt className="sr-only">Based in</dt>
+            <dd>{guide.based} · {guide.specialty}</dd>
           </div>
           <div className="flex items-start gap-2">
-            <Award className="mt-0.5 size-4 shrink-0 text-accent" />
-            <span>
-              <dt className="sr-only">Experience</dt>
-              <dd>{guide.experience}</dd>
-            </span>
+            <Languages className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+            <dt className="sr-only">Languages</dt>
+            <dd>{guide.languages}</dd>
           </div>
           <div className="flex items-start gap-2">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-            <span>
-              <dt className="sr-only">Specialized in</dt>
-              <dd>{guide.specialty}</dd>
-            </span>
+            <Award className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+            <dt className="sr-only">Experience</dt>
+            <dd>{guide.experience}</dd>
           </div>
         </dl>
-        <p className="mt-4 text-sm leading-relaxed">{guide.intro}</p>
+
+        <a
+          href={whatsappLink(`Hello, I would like to travel with ${guide.name}.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          Request {guide.name} as your guide <ArrowRight className="size-4" aria-hidden="true" />
+        </a>
       </div>
     </article>
   );
