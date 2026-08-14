@@ -143,6 +143,9 @@ export type Guide = {
   specialty: string;
   intro: string;
   image: string;
+  rating: number;
+  reviewCount: number;
+  based: string;
 };
 
 export const guides: Guide[] = [
@@ -155,6 +158,9 @@ export const guides: Guide[] = [
     intro:
       "Ahmad grew up between Kabul and the central highlands and has guided visitors across Afghanistan for over a decade.",
     image: guideAhmad,
+    rating: 4.9,
+    reviewCount: 128,
+    based: "Kabul",
   },
   {
     name: "Zahra",
@@ -165,6 +171,9 @@ export const guides: Guide[] = [
     intro:
       "Zahra connects travelers with families, artisans and cooks, offering a warm and personal view of daily Afghan life.",
     image: guideZahra,
+    rating: 5.0,
+    reviewCount: 86,
+    based: "Herat",
   },
   {
     name: "Nasir",
@@ -175,6 +184,9 @@ export const guides: Guide[] = [
     intro:
       "Nasir has crossed most of Afghanistan's high passes and handles remote-area routes, permits and safety planning.",
     image: guideNasir,
+    rating: 4.8,
+    reviewCount: 97,
+    based: "Faizabad, Badakhshan",
   },
 ];
 
