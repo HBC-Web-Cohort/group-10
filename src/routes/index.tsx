@@ -181,47 +181,31 @@ function Home() {
         </div>
       </section>
 
-      {/* Travel info */}
-      <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Travel information"
-            title="Everything you need before you arrive"
-            description="Visas, seasons, customs, currency and preparation — written for first-time visitors to Afghanistan."
-          />
-        </Reveal>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {travelInfo.slice(0, 6).map((item, i) => (
-            <Reveal key={item.title} delay={i * 60}>
-              <div className="h-full rounded-xl border border-border bg-card p-6 shadow-soft">
-                <h3 className="text-xl">{item.title}</h3>
-                <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-10">
-          <Link to="/travel-info" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-            Read the full travel guide <ArrowRight className="size-4" />
-          </Link>
-        </Reveal>
-      </section>
-
-      {/* Stories */}
+      {/* Reviews */}
       <section className="bg-secondary/60 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <SectionHeading eyebrow="Travel stories" title="Notes from the Silk Road" />
+            <SectionHeading
+              eyebrow="Traveler reviews"
+              title="What travelers say"
+              description="Honest words from guests who crossed Afghanistan with our guides."
+            />
           </Reveal>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stories.map((story, i) => (
-              <Reveal key={story.slug} delay={i * 70}>
-                <StoryCard story={story} />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {reviews.slice(0, 3).map((review, i) => (
+              <Reveal key={review.id} delay={i * 70}>
+                <ReviewCard review={review} />
               </Reveal>
             ))}
           </div>
+          <Reveal className="mt-10">
+            <Link
+              to="/reviews"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+            >
+              Read all reviews <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
