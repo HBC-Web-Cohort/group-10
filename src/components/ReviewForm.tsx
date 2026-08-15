@@ -56,14 +56,16 @@ export function ReviewForm({ onSubmitReview }: { onSubmitReview: (r: StoredRevie
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
 
-    const name = (data.name ?? "").trim();
-    const country = (data.country ?? "").trim();
-    const body = (data.body ?? "").trim();
+    const name = (data['name'] ?? "").trim();
+    const country = (data['country'] ?? "").trim();
+    const body = (data['body'] ?? "").trim();
     if (name.length < 2 || country.length < 2 || body.length < 10) {
       toast.error("Please add your name, country and a review of at least 10 characters.");
       return;
     }
 
+    const dest = (data['destination'] ?? "").trim();
+    const guide = (data['guideName'] ?? "").trim();
     setSubmitting(true);
     const review: StoredReview = {
       id:
@@ -76,10 +78,10 @@ export function ReviewForm({ onSubmitReview }: { onSubmitReview: (r: StoredRevie
       guideRating,
       companyRating,
       date: new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" }),
-      tour: (data.tour ?? "").trim() || "Custom itinerary",
-      destination: (data.destination ?? "").trim() || undefined,
-      guideName: (data.guideName ?? "").trim() || undefined,
-      title: (data.title ?? "").trim() || "A trip to remember",
+      tour: (data['tour'] ?? "").trim() || "Custom itinerary",
+      ...(dest ? { destination: dest } : {}),
+      ...(guide ? { guideName: guide } : {}),
+      title: (data['title'] ?? "").trim() || "A trip to remember",
       body,
     };
 
