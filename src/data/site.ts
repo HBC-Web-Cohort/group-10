@@ -35,6 +35,7 @@ export const mailtoLink = (subject = "Travel inquiry", body = "") =>
 export type Destination = {
   slug: string;
   name: string;
+  province: string;
   region: string;
   description: string;
   highlights: string[];
@@ -44,6 +45,7 @@ export type Destination = {
 export const destinations: Destination[] = [
   {
     slug: "kabul",
+    province: "Kabul",
     name: "Kabul",
     region: "Central Afghanistan",
     description:
@@ -53,6 +55,7 @@ export const destinations: Destination[] = [
   },
   {
     slug: "bamiyan",
+    province: "Bamyan",
     name: "Bamiyan",
     region: "Hazarajat Highlands",
     description:
@@ -62,6 +65,7 @@ export const destinations: Destination[] = [
   },
   {
     slug: "band-e-amir",
+    province: "Bamyan",
     name: "Band-e Amir",
     region: "Afghanistan's first national park",
     description: "Experience Afghanistan's breathtaking blue lakes surrounded by natural beauty.",
@@ -70,6 +74,7 @@ export const destinations: Destination[] = [
   },
   {
     slug: "herat",
+    province: "Herat",
     name: "Herat",
     region: "Western Afghanistan",
     description: "Explore centuries of Islamic architecture, art, and history.",
@@ -78,12 +83,43 @@ export const destinations: Destination[] = [
   },
   {
     slug: "wakhan-corridor",
+    province: "Badakhshan",
     name: "Wakhan Corridor",
     region: "Badakhshan & the Pamirs",
     description:
       "Journey through one of the world's most remote and beautiful mountain regions.",
     highlights: ["Pamir high plateau", "Kyrgyz nomad camps", "Wakhi villages", "Trekking routes"],
     image: wakhan,
+  },
+  {
+    slug: "nuristan",
+    province: "Nuristan",
+    name: "Nuristan",
+    region: "Eastern highlands",
+    description:
+      "Cedar forests, timber villages stacked on steep ridges and mountain roads few travellers ever see.",
+    highlights: ["Cedar forest trails", "Cliffside villages", "Traditional woodcraft", "Alpine passes"],
+    image: heroNuristan,
+  },
+  {
+    slug: "kunar",
+    province: "Kunar",
+    name: "Kunar Valley",
+    region: "Eastern Afghanistan",
+    description:
+      "Follow the blue Kunar river through terraced farmland and forested ridges in Afghanistan's warm east.",
+    highlights: ["Kunar river road", "Terraced farms", "Forested ridges", "Riverside villages"],
+    image: heroKunar,
+  },
+  {
+    slug: "panjshir",
+    province: "Panjshir",
+    name: "Panjshir Valley",
+    region: "Northeast of Kabul",
+    description:
+      "Emerald water, sheer rock walls and poplar groves — a day's drive from Kabul into a legendary valley.",
+    highlights: ["Panjshir river", "Emerald mines viewpoint", "Poplar groves", "Village teahouses"],
+    image: heroPanjshir,
   },
 ];
 
@@ -287,8 +323,18 @@ export type HeroSlide = {
 
 export const heroSlides: HeroSlide[] = [
   {
+    slug: "kabul",
+    province: "Kabul",
+    title: "Where Every Journey Begins",
+    description:
+      "Gardens, bazaars and hillside viewpoints — Afghanistan's capital, walked with guides who know every street.",
+    image: kabul,
+    imageAlt: "Kabul city framed by mountains at golden hour",
+  },
+  {
+
     slug: "bamiyan",
-    province: "Bamiyan",
+    province: "Bamyan",
     title: "Discover the Hidden Beauty of Afghanistan",
     description:
       "Ancient cliffs, high valleys and the turquoise lakes of Band-e Amir — travelled with guides who grew up here.",

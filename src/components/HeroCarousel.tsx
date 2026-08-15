@@ -77,10 +77,12 @@ export function HeroCarousel() {
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Link
             to="/destinations"
+            search={{ province: slide.province }}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]"
           >
-            Explore Destinations <ArrowRight className="size-4" aria-hidden="true" />
+            Explore {slide.province} <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
+
           <a
             href={whatsappLink(`Hello, I'm interested in traveling to ${slide.province}.`)}
             target="_blank"

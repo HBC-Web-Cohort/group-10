@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { StarRating } from "@/components/Cards";
 import { ReviewCard } from "@/components/ReviewCard";
 import { ReviewForm } from "@/components/ReviewForm";
-import { reviews } from "@/data/site";
+import { useReviews } from "@/lib/reviews-store";
 import heroImage from "@/assets/dest-bandeamir.jpg";
 
 export const Route = createFileRoute("/reviews")({
@@ -29,14 +29,10 @@ export const Route = createFileRoute("/reviews")({
   component: ReviewsPage,
 });
 
-const average = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-
-const distribution = [5, 4, 3, 2, 1].map((star) => ({
-  star,
-  count: reviews.filter((r) => r.rating === star).length,
-}));
-
 function ReviewsPage() {
+  const { reviews, addReview, count, average, guideAverage, companyAverage, distribution } =
+    useReviews();
+
   return (
     <>
       <PageHero
@@ -55,7 +51,10 @@ function ReviewsPage() {
                 <StarRating value={average} size="md" />
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Based on {reviews.length} verified traveler reviews
+                Based on {count} traveler review{count === 1 ? "" : "s"}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Guides {guideAverage.toFixed(1)} · Company {companyAverage.toFixed(1)}
               </p>
             </div>
             <dl className="space-y-2">
@@ -66,7 +65,7 @@ function ReviewsPage() {
                     <span className="h-2 flex-1 overflow-hidden rounded-full bg-secondary">
                       <span
                         className="block h-full rounded-full bg-accent"
-                        style={{ width: `${(row.count / reviews.length) * 100}%` }}
+                        style={{ width: `${row.percent}%` }}
                       />
                     </span>
                     <span className="w-6 text-right tabular-nums text-muted-foreground">
@@ -89,7 +88,7 @@ function ReviewsPage() {
 
         <Reveal className="mt-20">
           <div className="mx-auto max-w-2xl">
-            <ReviewForm />
+            <ReviewForm onSubmitReview={addReview} />
           </div>
         </Reveal>
       </section>
