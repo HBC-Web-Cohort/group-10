@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { company, destinations } from "@/data/site";
+import { company } from "@/data/site";
+import { ProvinceMultiSelect } from "@/components/ProvinceMultiSelect";
 
 const schema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name").max(100),
@@ -10,7 +11,6 @@ const schema = z.object({
   whatsapp: z.string().trim().min(6, "Please enter your WhatsApp number").max(30),
   travelDates: z.string().trim().max(120).optional().or(z.literal("")),
   travelers: z.string().trim().max(10).optional().or(z.literal("")),
-  interests: z.string().trim().max(200).optional().or(z.literal("")),
   message: z.string().trim().max(1500).optional().or(z.literal("")),
 });
 
@@ -19,6 +19,7 @@ const fieldClass =
 
 export function InquiryForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [interests, setInterests] = useState<string[]>([]);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,7 +47,7 @@ export function InquiryForm() {
       `WhatsApp: ${v.whatsapp}`,
       `Travel dates: ${v.travelDates || "-"}`,
       `Number of travelers: ${v.travelers || "-"}`,
-      `Interested destinations: ${v.interests || "-"}`,
+      `Interested destinations: ${interests.length ? interests.join(", ") : "-"}`,
       "",
       "Message:",
       v.message || "-",
@@ -112,19 +113,7 @@ export function InquiryForm() {
         <label htmlFor="interests" className="text-sm font-medium">
           Interested destinations
         </label>
-        <input
-          id="interests"
-          name="interests"
-          list="destination-options"
-          placeholder={destinations.map((d) => d.name).join(", ")}
-          className={fieldClass}
-          maxLength={200}
-        />
-        <datalist id="destination-options">
-          {destinations.map((d) => (
-            <option key={d.slug} value={d.name} />
-          ))}
-        </datalist>
+        <ProvinceMultiSelect id="interests" value={interests} onChange={setInterests} />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="message" className="text-sm font-medium">
