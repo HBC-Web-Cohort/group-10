@@ -82,18 +82,19 @@ export function Header() {
 
         <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle className={cn(scrolled || open ? "text-foreground" : "text-sand")} />
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          className={cn(
-            "lg:hidden rounded-md p-2 transition-colors",
-            scrolled || open ? "text-foreground" : "text-sand",
-          )}
-        >
-          {open ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className={cn(
+              "rounded-md p-2 transition-colors",
+              scrolled || open ? "text-foreground" : "text-sand",
+            )}
+          >
+            {open ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </div>
 
       {open ? (
