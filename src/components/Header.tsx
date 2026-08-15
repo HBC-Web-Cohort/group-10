@@ -55,15 +55,21 @@ export function Header() {
               key={item.to}
               to={item.to}
               activeOptions={{ exact: item.to === "/" }}
-              activeProps={{ className: "text-accent" }}
+              activeProps={{
+                className: "text-accent font-semibold after:w-full",
+              }}
               className={cn(
-                "text-sm transition-colors hover:text-accent",
-                scrolled ? "text-foreground/80" : "text-sand/85",
+                "relative text-sm font-medium tracking-wide transition-colors hover:text-accent",
+                "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full",
+                scrolled || open ? "text-foreground/80" : "text-sand/85",
               )}
             >
               {item.label}
             </Link>
           ))}
+          <ThemeToggle
+            className={cn(scrolled || open ? "text-foreground/80" : "text-sand/85")}
+          />
           <a
             href={whatsappLink()}
             target="_blank"
@@ -74,6 +80,8 @@ export function Header() {
           </a>
         </nav>
 
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle className={cn(scrolled || open ? "text-foreground" : "text-sand")} />
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
