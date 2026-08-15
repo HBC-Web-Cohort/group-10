@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, whatsappLink } from "@/data/site";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const nav = [
   { to: "/", label: "Home" },
