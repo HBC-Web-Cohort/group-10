@@ -2,15 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, HandHeart, Map, Sparkles, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { DestinationCard, GuideCard, StoryCard, TourCard } from "@/components/Cards";
+import { DestinationCard, GuideCard, TourCard } from "@/components/Cards";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { ReviewCard } from "@/components/ReviewCard";
+import { PaymentModal } from "@/components/PaymentModal";
 import {
   company,
   destinations,
   guides,
   paymentOptions,
-  stories,
+  reviews,
   tours,
-  travelInfo,
   whatsappLink,
 } from "@/data/site";
 import heroImage from "@/assets/hero-afghanistan.jpg";
