@@ -230,6 +230,16 @@ function Home() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-10">
+          <PaymentModal>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              View full payment details <ArrowRight className="size-4" aria-hidden="true" />
+            </button>
+          </PaymentModal>
+        </Reveal>
       </section>
 
       {/* CTA */}
