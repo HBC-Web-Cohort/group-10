@@ -64,43 +64,7 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden">
-        <img
-          src={heroImage}
-          alt="Traveler on a mountain ridge in the Afghan Hindu Kush at sunrise"
-          width={1920}
-          height={1088}
-          fetchPriority="high"
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
-        <div className="hero-overlay absolute inset-0 -z-10" />
-        <div className="mx-auto w-full max-w-6xl px-6 pb-20 pt-32">
-          <p className="eyebrow text-gold-soft">Silk Road Afghanistan</p>
-          <h1 className="mt-5 max-w-4xl text-4xl leading-[1.06] text-sand sm:text-6xl md:text-7xl">
-            Discover the Hidden Beauty of Afghanistan
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-sand/85 sm:text-xl">
-            Experience ancient history, breathtaking landscapes, and Afghan hospitality with trusted
-            local guides.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              to="/destinations"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]"
-            >
-              Explore Destinations <ArrowRight className="size-4" />
-            </Link>
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-sand/50 px-8 py-4 text-sm font-semibold text-sand backdrop-blur-sm transition-colors hover:bg-sand hover:text-ink"
-            >
-              <MessageCircle className="size-4" /> Contact Us on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* About */}
       <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
