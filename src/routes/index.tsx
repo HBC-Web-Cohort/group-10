@@ -2,15 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, HandHeart, Map, Sparkles, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { DestinationCard, GuideCard, StoryCard, TourCard } from "@/components/Cards";
+import { DestinationCard, GuideCard, TourCard } from "@/components/Cards";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { ReviewCard } from "@/components/ReviewCard";
+import { PaymentModal } from "@/components/PaymentModal";
 import {
   company,
   destinations,
   guides,
   paymentOptions,
-  stories,
+  reviews,
   tours,
-  travelInfo,
   whatsappLink,
 } from "@/data/site";
 import heroImage from "@/assets/hero-afghanistan.jpg";
@@ -64,43 +66,7 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden">
-        <img
-          src={heroImage}
-          alt="Traveler on a mountain ridge in the Afghan Hindu Kush at sunrise"
-          width={1920}
-          height={1088}
-          fetchPriority="high"
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
-        <div className="hero-overlay absolute inset-0 -z-10" />
-        <div className="mx-auto w-full max-w-6xl px-6 pb-20 pt-32">
-          <p className="eyebrow text-gold-soft">Silk Road Afghanistan</p>
-          <h1 className="mt-5 max-w-4xl text-4xl leading-[1.06] text-sand sm:text-6xl md:text-7xl">
-            Discover the Hidden Beauty of Afghanistan
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-sand/85 sm:text-xl">
-            Experience ancient history, breathtaking landscapes, and Afghan hospitality with trusted
-            local guides.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              to="/destinations"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.03]"
-            >
-              Explore Destinations <ArrowRight className="size-4" />
-            </Link>
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-sand/50 px-8 py-4 text-sm font-semibold text-sand backdrop-blur-sm transition-colors hover:bg-sand hover:text-ink"
-            >
-              <MessageCircle className="size-4" /> Contact Us on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* About */}
       <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
@@ -217,47 +183,31 @@ function Home() {
         </div>
       </section>
 
-      {/* Travel info */}
-      <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Travel information"
-            title="Everything you need before you arrive"
-            description="Visas, seasons, customs, currency and preparation — written for first-time visitors to Afghanistan."
-          />
-        </Reveal>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {travelInfo.slice(0, 6).map((item, i) => (
-            <Reveal key={item.title} delay={i * 60}>
-              <div className="h-full rounded-xl border border-border bg-card p-6 shadow-soft">
-                <h3 className="text-xl">{item.title}</h3>
-                <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-10">
-          <Link to="/travel-info" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-            Read the full travel guide <ArrowRight className="size-4" />
-          </Link>
-        </Reveal>
-      </section>
-
-      {/* Stories */}
+      {/* Reviews */}
       <section className="bg-secondary/60 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <SectionHeading eyebrow="Travel stories" title="Notes from the Silk Road" />
+            <SectionHeading
+              eyebrow="Traveler reviews"
+              title="What travelers say"
+              description="Honest words from guests who crossed Afghanistan with our guides."
+            />
           </Reveal>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stories.map((story, i) => (
-              <Reveal key={story.slug} delay={i * 70}>
-                <StoryCard story={story} />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {reviews.slice(0, 3).map((review, i) => (
+              <Reveal key={review.id} delay={i * 70}>
+                <ReviewCard review={review} />
               </Reveal>
             ))}
           </div>
+          <Reveal className="mt-10">
+            <Link
+              to="/reviews"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+            >
+              Read all reviews <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -280,6 +230,16 @@ function Home() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-10">
+          <PaymentModal>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              View full payment details <ArrowRight className="size-4" aria-hidden="true" />
+            </button>
+          </PaymentModal>
+        </Reveal>
       </section>
 
       {/* CTA */}
