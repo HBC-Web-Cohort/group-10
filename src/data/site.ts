@@ -323,6 +323,16 @@ export type HeroSlide = {
 
 export const heroSlides: HeroSlide[] = [
   {
+    slug: "kabul",
+    province: "Kabul",
+    title: "Where Every Journey Begins",
+    description:
+      "Gardens, bazaars and hillside viewpoints — Afghanistan's capital, walked with guides who know every street.",
+    image: kabul,
+    imageAlt: "Kabul city framed by mountains at golden hour",
+  },
+  {
+
     slug: "bamiyan",
     province: "Bamyan",
     title: "Discover the Hidden Beauty of Afghanistan",
