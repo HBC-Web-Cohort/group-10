@@ -101,7 +101,7 @@ function Home() {
       </section>
 
       {/* Destinations */}
-      <section className="bg-secondary/60 py-24 sm:py-32">
+      <section className="bg-background py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -159,7 +159,7 @@ function Home() {
       </section>
 
       {/* Guides */}
-      <section className="bg-secondary/60 py-24 text-foreground dark:bg-ink dark:text-sand sm:py-32">
+      <section className="bg-background py-24 text-foreground dark:bg-ink dark:text-sand sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <p className="eyebrow dark:text-gold-soft">Our local guides</p>
@@ -185,7 +185,7 @@ function Home() {
       </section>
 
       {/* Reviews */}
-      <section className="bg-secondary/60 py-24 sm:py-32">
+      <section className="bg-background py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
