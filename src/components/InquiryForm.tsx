@@ -124,7 +124,7 @@ export function InquiryForm() {
       <div className="sm:col-span-2">
         <button
           type="submit"
-          className="w-full rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.01] sm:w-auto"
+          className="w-full rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-accent-foreground shadow-soft transition-all duration-300 hover:scale-[1.01] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto"
         >
           Send booking inquiry
         </button>

@@ -159,18 +159,19 @@ function Home() {
       </section>
 
       {/* Guides */}
-      <section className="bg-ink py-24 text-sand sm:py-32">
+      <section className="bg-secondary/60 py-24 text-foreground dark:bg-ink dark:text-sand sm:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <p className="eyebrow text-gold-soft">Our local guides</p>
+            <p className="eyebrow dark:text-gold-soft">Our local guides</p>
             <h2 className="mt-3 max-w-2xl text-3xl leading-tight sm:text-5xl">
               The people who make the journey
             </h2>
-            <p className="mt-4 max-w-2xl text-sand/75">
+            <p className="mt-4 max-w-2xl text-muted-foreground dark:text-sand/75">
               Licensed Afghan guides with deep regional knowledge, fluent English, and long
               experience hosting international travelers.
             </p>
           </Reveal>
+
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {guides.map((guide, i) => (
               <Reveal key={guide.name} delay={i * 80}>
