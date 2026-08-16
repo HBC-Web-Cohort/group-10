@@ -12,7 +12,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/60 text-muted-foreground dark:bg-ink dark:text-sand/80">
+    <footer className="bg-background text-muted-foreground dark:bg-ink dark:text-sand/80">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-3">
         <div>
           <p className="font-display text-2xl text-foreground dark:text-sand">Silk Road Afghanistan</p>

@@ -47,7 +47,7 @@ function ToursPage() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20 sm:py-24">
+      <section className="bg-background py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-6">
           <p className="eyebrow">Payment options</p>
           <h2 className="mt-3 text-3xl sm:text-4xl">Simple, transparent payments</h2>

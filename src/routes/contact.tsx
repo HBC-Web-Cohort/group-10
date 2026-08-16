@@ -75,7 +75,7 @@ function ContactPage() {
           <h2 className="mt-3 text-3xl">How travelers pay</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {paymentOptions.map((option) => (
-              <div key={option.title} className="rounded-xl border border-border bg-secondary/50 p-6">
+              <div key={option.title} className="rounded-xl border border-border bg-card p-6">
                 <h3 className="text-xl">{option.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{option.body}</p>
               </div>
