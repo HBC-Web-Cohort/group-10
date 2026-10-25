@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { normalizeProvince } from "@/data/provinces";
 import { PageHero } from "@/components/PageHero";
@@ -10,7 +11,10 @@ import heroImage from "@/assets/dest-bandeamir.jpg";
 
 const searchSchema = z.object({
   province: fallback(z.string(), "").default(""),
+  page: fallback(z.coerce.number().int().min(1), 1).default(1),
 });
+
+const DESTINATIONS_PER_PAGE = 5;
 
 export const Route = createFileRoute("/destinations")({
   validateSearch: zodValidator(searchSchema),
@@ -36,10 +40,20 @@ export const Route = createFileRoute("/destinations")({
 });
 
 function DestinationsPage() {
-  const { province } = Route.useSearch();
+  const { province, page } = Route.useSearch();
   const active = normalizeProvince(province);
   const availableProvinces = Array.from(new Set(destinations.map((d) => d.province))).sort();
-  const visible = active ? destinations.filter((d) => d.province === active) : destinations;
+  const filteredDestinations = active
+    ? destinations.filter((d) => d.province === active)
+    : destinations;
+  const totalPages = Math.max(1, Math.ceil(filteredDestinations.length / DESTINATIONS_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const visible = filteredDestinations.slice(
+    (currentPage - 1) * DESTINATIONS_PER_PAGE,
+    currentPage * DESTINATIONS_PER_PAGE,
+  );
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+  const pageSearch = (nextPage: number) => ({ province: active ?? "", page: nextPage });
 
   return (
     <>
@@ -56,7 +70,7 @@ function DestinationsPage() {
             <li>
               <Link
                 to="/destinations"
-                search={{ province: "" }}
+                search={{ province: "", page: 1 }}
                 className={cn(
                   "inline-flex rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                   !active
@@ -71,7 +85,7 @@ function DestinationsPage() {
               <li key={p}>
                 <Link
                   to="/destinations"
-                  search={{ province: p }}
+                  search={{ province: p, page: 1 }}
                   aria-current={active === p ? "page" : undefined}
                   className={cn(
                     "inline-flex rounded-full border px-4 py-2 text-sm font-medium transition-colors",
@@ -87,21 +101,22 @@ function DestinationsPage() {
           </ul>
           {active && (
             <p className="mt-4 text-sm text-muted-foreground">
-              Showing {visible.length} destination{visible.length === 1 ? "" : "s"} in {active}.{" "}
-              <Link to="/destinations" search={{ province: "" }} className="text-accent underline underline-offset-4">
+              Showing {filteredDestinations.length} destination
+              {filteredDestinations.length === 1 ? "" : "s"} in {active}.{" "}
+              <Link
+                to="/destinations"
+                search={{ province: "", page: 1 }}
+                className="text-accent underline underline-offset-4"
+              >
                 Clear filter
               </Link>
             </p>
           )}
         </nav>
 
-        <div className="space-y-20">
+        <div id="destination-list" className="space-y-20 scroll-mt-28">
           {visible.map((destination, index) => (
-            <Reveal
-              key={destination.slug}
-              as="article"
-              className="scroll-mt-28"
-            >
+            <Reveal key={destination.slug} as="article" className="scroll-mt-28">
               <div id={destination.slug} className="grid items-center gap-10 md:grid-cols-2">
                 <div className={index % 2 === 1 ? "md:order-2" : undefined}>
                   <img
@@ -141,11 +156,79 @@ function DestinationsPage() {
           ))}
         </div>
 
-        {visible.length === 0 && (
+        {filteredDestinations.length === 0 && (
           <p className="text-center text-muted-foreground">
             We do not run scheduled trips in {active} yet — message us and we will plan a custom
             route.
           </p>
+        )}
+
+        {filteredDestinations.length > DESTINATIONS_PER_PAGE && (
+          <nav
+            aria-label="Destination pages"
+            className="mt-16 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft sm:flex-row"
+          >
+            <p className="text-sm text-muted-foreground">
+              Showing {(currentPage - 1) * DESTINATIONS_PER_PAGE + 1}–
+              {Math.min(currentPage * DESTINATIONS_PER_PAGE, filteredDestinations.length)} of{" "}
+              {filteredDestinations.length} destinations
+            </p>
+            <div className="flex items-center gap-1.5" role="list">
+              {currentPage > 1 ? (
+                <Link
+                  to="/destinations"
+                  search={pageSearch(currentPage - 1)}
+                  hash="destination-list"
+                  aria-label="Previous page"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                >
+                  <ChevronLeft className="size-4" aria-hidden="true" />
+                </Link>
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground/40"
+                >
+                  <ChevronLeft className="size-4" />
+                </span>
+              )}
+              {pageNumbers.map((pageNumber) => (
+                <Link
+                  key={pageNumber}
+                  to="/destinations"
+                  search={pageSearch(pageNumber)}
+                  hash="destination-list"
+                  aria-current={pageNumber === currentPage ? "page" : undefined}
+                  className={cn(
+                    "inline-flex size-10 items-center justify-center rounded-full border text-sm font-semibold transition-all",
+                    pageNumber === currentPage
+                      ? "border-primary bg-primary text-primary-foreground shadow-soft"
+                      : "border-border text-foreground hover:border-accent hover:bg-accent hover:text-accent-foreground",
+                  )}
+                >
+                  {pageNumber}
+                </Link>
+              ))}
+              {currentPage < totalPages ? (
+                <Link
+                  to="/destinations"
+                  search={pageSearch(currentPage + 1)}
+                  hash="destination-list"
+                  aria-label="Next page"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                >
+                  <ChevronRight className="size-4" aria-hidden="true" />
+                </Link>
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground/40"
+                >
+                  <ChevronRight className="size-4" />
+                </span>
+              )}
+            </div>
+          </nav>
         )}
       </section>
     </>

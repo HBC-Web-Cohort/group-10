@@ -43,6 +43,15 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                to="/"
+                hash="meet-our-team"
+                className="transition-colors hover:text-accent dark:hover:text-gold"
+              >
+                Meet Our Team
+              </Link>
+            </li>
           </ul>
         </nav>
 

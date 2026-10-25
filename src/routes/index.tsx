@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Compass, HandHeart, Map, Sparkles, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -27,7 +28,10 @@ export const Route = createFileRoute("/")({
         content:
           "Discover the hidden beauty of Afghanistan with trusted local guides — Kabul, Bamiyan, Band-e Amir, Herat and the Wakhan Corridor.",
       },
-      { property: "og:title", content: "Silk Road Afghanistan | Guided Tours & Authentic Journeys" },
+      {
+        property: "og:title",
+        content: "Silk Road Afghanistan | Guided Tours & Authentic Journeys",
+      },
       {
         property: "og:description",
         content:
@@ -56,13 +60,61 @@ export const Route = createFileRoute("/")({
 });
 
 const pillars = [
-  { icon: Compass, title: "Local knowledge", body: "Routes, roads and timing planned by Afghans who live in these regions." },
-  { icon: Sparkles, title: "Cultural experiences", body: "Bazaars, artisans, shared meals and conversations you cannot book online." },
-  { icon: Map, title: "Personalized journeys", body: "Every itinerary is shaped around your dates, pace and interests." },
-  { icon: HandHeart, title: "Authentic travel", body: "Small groups, local hosts, and travel that supports Afghan families." },
+  {
+    icon: Compass,
+    title: "Local knowledge",
+    body: "Routes, roads and timing planned by Afghans who live in these regions.",
+  },
+  {
+    icon: Sparkles,
+    title: "Cultural experiences",
+    body: "Bazaars, artisans, shared meals and conversations you cannot book online.",
+  },
+  {
+    icon: Map,
+    title: "Personalized journeys",
+    body: "Every itinerary is shaped around your dates, pace and interests.",
+  },
+  {
+    icon: HandHeart,
+    title: "Authentic travel",
+    body: "Small groups, local hosts, and travel that supports Afghan families.",
+  },
 ];
 
+const HOME_DESTINATIONS_PER_BATCH = 8;
+
+const teamMembers = [
+  {
+    name: "Atal Ahmadzai",
+    role: "Full Stack Developer",
+    description:
+      "Led full-stack development across the project, building both the frontend experience and backend integration layer.",
+    initials: "AA",
+  },
+  {
+    name: "Sajid Sadaat",
+    role: "Frontend Developer",
+    description:
+      "Focused on frontend development and user interface implementation, shaping the website experience and responsive design.",
+    initials: "SS",
+  },
+  {
+    name: "Faisal Wali",
+    role: "Frontend Developer",
+    description:
+      "Contributed to frontend development and interface implementation, helping deliver a polished and user-friendly experience.",
+    initials: "FW",
+  },
+] as const;
+
 function Home() {
+  const [visibleDestinationCount, setVisibleDestinationCount] = useState(
+    HOME_DESTINATIONS_PER_BATCH,
+  );
+  const visibleDestinations = destinations.slice(0, visibleDestinationCount);
+  const hasMoreDestinations = visibleDestinationCount < destinations.length;
+
   return (
     <>
       {/* Hero */}
@@ -78,7 +130,7 @@ function Home() {
               loading="lazy"
               width={1200}
               height={900}
-              className="aspect-[4/3] w-full rounded-xl object-cover shadow-elegant"
+              className="aspect-4/3 w-full rounded-xl object-cover shadow-elegant"
             />
           </Reveal>
           <Reveal delay={100}>
@@ -92,7 +144,9 @@ function Home() {
                 <div key={pillar.title}>
                   <pillar.icon className="size-6 text-accent" />
                   <h3 className="mt-3 text-lg">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pillar.body}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {pillar.body}
+                  </p>
                 </div>
               ))}
             </div>
@@ -107,27 +161,34 @@ function Home() {
             <SectionHeading
               eyebrow="Destinations"
               title="Places that stay with you"
-              description="Five regions that show the range of Afghanistan — its cities, its heritage, and its wild mountain country."
+              description="A selection of places that show the range of Afghanistan — its cities, heritage, valleys and wild mountain country."
             />
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((destination, i) => (
+            {visibleDestinations.map((destination, i) => (
               <Reveal key={destination.slug} delay={i * 70}>
                 <DestinationCard destination={destination} />
               </Reveal>
             ))}
-            <Reveal delay={350}>
-              <Link
-                to="/destinations"
-                className="flex h-full min-h-[16rem] flex-col justify-end rounded-xl border border-dashed border-border bg-card p-8 transition-colors hover:border-accent"
-              >
-                <p className="eyebrow">More to come</p>
-                <h3 className="mt-2 text-2xl">See all destinations</h3>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                  Explore <ArrowRight className="size-4" />
-                </span>
-              </Link>
-            </Reveal>
+            {hasMoreDestinations && (
+              <Reveal delay={350}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setVisibleDestinationCount((count) =>
+                      Math.min(count + HOME_DESTINATIONS_PER_BATCH, destinations.length),
+                    )
+                  }
+                  className="flex h-full min-h-64 w-full flex-col justify-end rounded-xl border border-dashed border-border bg-card p-8 text-left transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <p className="eyebrow">More provinces</p>
+                  <h3 className="mt-2 text-2xl">Load 8 more destinations</h3>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    Load more <ArrowRight className="size-4" aria-hidden="true" />
+                  </span>
+                </button>
+              </Reveal>
+            )}
           </div>
         </div>
       </section>
@@ -181,6 +242,42 @@ function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Meet Our Team */}
+      <section id="meet-our-team" className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <Reveal>
+          <SectionHeading
+            eyebrow="Development team"
+            title="Meet Our Development Team"
+            description="The talented developers behind this project."
+            align="center"
+            className="mx-auto"
+          />
+        </Reveal>
+
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          {teamMembers.map((member, i) => (
+            <Reveal key={member.name} delay={i * 90}>
+              <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
+                <div className="flex justify-center">
+                  <div className="flex size-24 items-center justify-center rounded-full bg-linear-to-br from-primary/10 via-accent/30 to-gold/35 text-xl font-semibold text-foreground ring-1 ring-border">
+                    {member.initials}
+                  </div>
+                </div>
+                <div className="mt-6 text-center">
+                  <h3 className="text-2xl text-foreground">{member.name}</h3>
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent dark:text-gold-soft">
+                    {member.role}
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {member.description}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Silk Road Afghanistan">
+  <defs>
+    <linearGradient id="sky" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4a3b91"/>
+      <stop offset="1" stop-color="#1d275a"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="22" y1="22" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffae54"/>
+      <stop offset="1" stop-color="#e95786"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#sky)"/>
+  <circle cx="37" cy="27" r="12" fill="url(#sun)"/>
+  <path d="M13 45c8-1 11-7 17-7 6 0 8 5 14 5 3 0 5-1 7-3" fill="none" stroke="#ffe1a3" stroke-linecap="round" stroke-width="5"/>
+  <path d="M13 45c8-1 11-7 17-7" fill="none" stroke="#fff8df" stroke-linecap="round" stroke-width="2"/>
+  <path d="M19 22v12m-6-6h12" stroke="#fff8df" stroke-linecap="round" stroke-width="3"/>
+</svg>

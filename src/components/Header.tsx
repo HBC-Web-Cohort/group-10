@@ -31,7 +31,7 @@ export function Header() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled || open
-          ? "border-b border-border/60 bg-background/92 backdrop-blur-md"
+          ? "border-b border-border bg-background shadow-soft"
           : "bg-transparent",
       )}
     >
@@ -62,14 +62,14 @@ export function Header() {
               className={cn(
                 "relative text-sm font-medium tracking-wide transition-colors hover:text-accent",
                 "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full",
-                scrolled || open ? "text-foreground/80" : "text-sand/85",
+                scrolled || open ? "text-foreground" : "text-sand/85",
               )}
             >
               {item.label}
             </Link>
           ))}
           <ThemeToggle
-            className={cn(scrolled || open ? "text-foreground/80" : "text-sand/85")}
+            className={cn(scrolled || open ? "text-foreground" : "text-sand/85")}
           />
           <a
             href={whatsappLink()}

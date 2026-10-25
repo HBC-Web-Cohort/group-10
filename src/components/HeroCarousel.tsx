@@ -30,7 +30,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden"
+      className="relative isolate flex min-h-[62svh] items-center overflow-hidden sm:min-h-[68svh] lg:min-h-[72svh]"
       aria-roledescription="carousel"
       aria-label="Featured provinces of Afghanistan"
       onKeyDown={(e) => {
@@ -57,7 +57,7 @@ export function HeroCarousel() {
       ))}
       <div className="hero-overlay absolute inset-0 -z-10" />
 
-      <div className="mx-auto w-full max-w-6xl px-6 pb-24 pt-32">
+      <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20 sm:pb-16 sm:pt-24">
         <div
           key={slide.slug}
           aria-live="polite"
@@ -123,7 +123,7 @@ export function HeroCarousel() {
             )}
           </button>
 
-          <ul className="ml-3 flex items-center gap-2">
+          <ul className="ml-3 flex max-w-[calc(100vw-12rem)] items-center gap-2 overflow-x-auto pb-1">
             {heroSlides.map((s, i) => (
               <li key={s.slug}>
                 <button
