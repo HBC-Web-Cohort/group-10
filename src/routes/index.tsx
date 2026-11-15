@@ -86,25 +86,11 @@ const HOME_DESTINATIONS_PER_BATCH = 8;
 
 const teamMembers = [
   {
-    name: "Atal Ahmadzai",
+    name: "Abdul Rahman Asghary",
     role: "Full Stack Developer",
     description:
-      "Led full-stack development across the project, building both the frontend experience and backend integration layer.",
+      "Built and maintained the full web experience across frontend and backend integrations for the project.",
     initials: "AA",
-  },
-  {
-    name: "Sajid Sadaat",
-    role: "Frontend Developer",
-    description:
-      "Focused on frontend development and user interface implementation, shaping the website experience and responsive design.",
-    initials: "SS",
-  },
-  {
-    name: "Faisal Wali",
-    role: "Frontend Developer",
-    description:
-      "Contributed to frontend development and interface implementation, helping deliver a polished and user-friendly experience.",
-    initials: "FW",
   },
 ] as const;
 
@@ -257,10 +243,10 @@ function Home() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className="mt-14 flex justify-center">
           {teamMembers.map((member, i) => (
             <Reveal key={member.name} delay={i * 90}>
-              <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
+              <div className="group w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
                 <div className="flex justify-center">
                   <div className="flex size-24 items-center justify-center rounded-full bg-linear-to-br from-primary/10 via-accent/30 to-gold/35 text-xl font-semibold text-foreground ring-1 ring-border">
                     {member.initials}

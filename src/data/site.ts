@@ -46,9 +46,9 @@ const provinceImages = {
 export const company = {
   name: "Silk Road Afghanistan",
   tagline: "Authentic journeys through Afghanistan with trusted local guides.",
-  email: "atalwiar145@gmail.com",
-  whatsappNumber: "93778633552",
-  whatsappDisplay: "+93 778 633 552",
+  email: "Abdulrahmanasgharii@gmail.com",
+  whatsappNumber: "93775411221",
+  whatsappDisplay: "+93 77 541 1221",
   social: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
